@@ -29,6 +29,10 @@ la barra superior sigue el tema en escritorio y **permanece oscura en móvil**. 
 El CSS del portal clásico es una copia de `js-logistics/app/css/estilos.css`. `postcss.config.js` encierra todas sus reglas
 dentro de `.clasico`, así que no choca con Tailwind ni con la landing.
 
+## App instalable (PWA)
+
+El portal se puede instalar («Instalar app» en el menú de la cuenta, o el ícono del navegador). El service worker (`public/sw.js`) solo guarda la pantalla «sin conexión» y nunca respuestas de `/api`. Reglas en `docs/ESTADO.md`.
+
 ## Despliegue en Vercel
 
 `vercel.json` fija Vite, la carpeta `dist` y la regla de SPA (toda ruta va a `index.html`).

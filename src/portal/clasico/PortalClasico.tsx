@@ -23,6 +23,7 @@ import { CargandoVista, Dialogo, LOGO } from './piezas';
 import { InicioSkeleton } from './InicioSkeleton';
 import { CampanitaCliente } from './Notificaciones';
 import { clientToast } from '../../utils/clientToast';
+import OpcionInstalarApp from '../../components/InstalarApp';
 
 // Cada pestaña y el detalle del pedido van en su propio archivo: se descargan solo al abrirlos.
 const cargar = {
@@ -184,6 +185,7 @@ function PerfilMovil({ nombre, iniciales, theme, alCambiarTema, alSalir }: { nom
     {abierto && <div className="perfil-menu" role="menu">
       <div className="perfil-menu-cab"><b>{nombre.replace(/@.*/, '') || 'Mi cuenta'}</b><small>Portal de clientes</small></div>
       <button type="button" role="menuitem" onClick={() => { alCambiarTema(); setAbierto(false); }}>{oscuro ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}<span>{oscuro ? 'Modo claro' : 'Modo oscuro'}</span></button>
+      <OpcionInstalarApp alAccionar={() => setAbierto(false)} />
       <button type="button" role="menuitem" className="peligro" onClick={() => { setAbierto(false); alSalir(); }}><LogOut aria-hidden="true" /><span>Cerrar sesión</span></button>
     </div>}
   </div>;
