@@ -434,3 +434,11 @@ Por petición explícita del dueño, `Home.tsx` sustituye la composición anteri
 - La vista muestra la guía, el estado actual con una frase y los 5 pasos (Solicitado, Guía generada, Recogido, En ruta, Entregado) con la fecha de inicio de cada uno: vertical en el celular y en fila desde `md`. Ya no muestra origen ni destino ni servicio: el rastreo público no debe dar nada del remitente, el destinatario ni el mensajero.
 - Si la guía está devuelta, el último paso se llama "Novedad con el envío" y debajo aparece un aviso con "Iniciar sesión en mi portal" (`/login`) y, si el backend trae el enlace (`CHATBOT_WHATSAPP`), "Escribir por WhatsApp".
 - Modo demo: `rastrearGuia()` arma los pasos desde los pedidos de prueba.
+
+## App instalable (PWA) del portal de clientes — 2026-11-16
+
+- `public/manifest.webmanifest` (`id` y `scope` `/`, `start_url` `/cliente/`): el cliente instala el sitio y la app abre su portal; sin sesión lo manda al login. La oficina y los mensajeros son otra instalación, en `js-logistics/frontend`.
+- `public/sw.js` **solo guarda `sin-conexion.html`**. No toca `/api` ni `/assets`, así que nunca muestra pedidos o saldos viejos y las versiones nuevas se ven al recargar. No le agregues caché de datos. Si cambias la pantalla sin conexión, sube `VERSION`.
+- `src/lib/pwa.ts` registra el service worker (solo en producción) y da `useInstalarApp()`. La opción «Instalar app» está en el menú de la cuenta del portal (`components/InstalarApp.tsx`); en iPhone explica «Compartir → Agregar a pantalla de inicio».
+- Íconos en `public/pwa/` (logo sobre blanco; el «maskable» deja margen para recortes circulares). `public/img/favicon_io/site.webmanifest` es el heredado, está sin nombre y no se usa.
+- `vercel.json` sirve `sw.js` sin caché. Comprobado con Chromium: sin errores de instalabilidad y pantalla sin conexión al navegar sin red. No se probó la instalación real en un celular.
