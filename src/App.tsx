@@ -12,18 +12,19 @@ import JSBot from './components/jsbot/JSBot';
 import FalloPantalla from './components/FalloPantalla';
 import { ApiError } from './api/http';
 import { FRESCO, EN_MEMORIA } from './utils/queryCache';
+import { cargaSegura } from './lib/cargaSegura';
 
 // La portada va en el archivo principal porque es lo que más se abre. El resto de páginas se descarga solo cuando se visita:
 // quien entra a la portada no baja el portal, y quien entra al portal no baja el registro ni el rastreo (ni axios, que solo usan ellos).
-const Login = lazy(() => import('./pages/Login'));
-const Register = lazy(() => import('./pages/Register'));
-const Track = lazy(() => import('./pages/Track'));
-const Equipo = lazy(() => import('./pages/Equipo'));
-const Recuperar = lazy(() => import('./pages/Recuperar'));
-const Restablecer = lazy(() => import('./pages/Restablecer'));
-const PortalCliente = lazy(() => import('./portal/PortalCliente'));
+const Login = lazy(() => cargaSegura(() => import('./pages/Login')));
+const Register = lazy(() => cargaSegura(() => import('./pages/Register')));
+const Track = lazy(() => cargaSegura(() => import('./pages/Track')));
+const Equipo = lazy(() => cargaSegura(() => import('./pages/Equipo')));
+const Recuperar = lazy(() => cargaSegura(() => import('./pages/Recuperar')));
+const Restablecer = lazy(() => cargaSegura(() => import('./pages/Restablecer')));
+const PortalCliente = lazy(() => cargaSegura(() => import('./portal/PortalCliente')));
 // Los avisos (react-toastify y su CSS) tampoco van en el archivo principal: se montan cuando el navegador queda libre.
-const Avisos = lazy(() => import('./components/Avisos'));
+const Avisos = lazy(() => cargaSegura(() => import('./components/Avisos')));
 
 function AvisosDiferidos() {
   const [listo, setListo] = useState(false);

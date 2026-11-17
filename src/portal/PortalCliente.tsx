@@ -1,8 +1,9 @@
 import { lazy, Suspense } from 'react';
 import { Spinner } from '../components/ui';
+import { cargaSegura } from '../lib/cargaSegura';
 
 // El portal se descarga solo cuando se entra: trae su propio CSS (el de la app actual).
-const PortalClasico = lazy(() => import('./clasico/PortalClasico'));
+const PortalClasico = lazy(() => cargaSegura(() => import('./clasico/PortalClasico')));
 
 /** Portal del cliente: la vista clásica, la misma de la app actual. */
 export default function PortalCliente() {

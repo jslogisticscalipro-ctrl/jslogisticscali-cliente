@@ -12,9 +12,10 @@ import { cambioPendiente, ESTADO_PEDIDO } from '../../lib/negocio';
 import type { DatosCliente } from '../useDatosCliente';
 import { HojaFiltros } from './HojaFiltros';
 import { CargandoVista, Dialogo, EtqCambio, lineaPedido, PaginadorSinTotal } from './piezas';
+import { cargaSegura } from '../../lib/cargaSegura';
 
-const MisSolicitudes = lazy(() => import('./MisSolicitudes'));
-const NuevoPedido = lazy(() => import('./NuevoPedido'));
+const MisSolicitudes = lazy(() => cargaSegura(() => import('./MisSolicitudes')));
+const NuevoPedido = lazy(() => cargaSegura(() => import('./NuevoPedido')));
 const SUBTABS = ['pedidos', 'solicitudes'] as const;
 /** Al acercar el puntero o el foco a "Nuevo pedido" se adelanta la descarga del formulario. */
 const precargarNuevo = () => { import('./NuevoPedido').catch(() => { /* se reintenta al abrirlo */ }); };

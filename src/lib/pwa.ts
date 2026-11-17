@@ -1,6 +1,7 @@
 /* App instalable (PWA): registra el service worker y maneja el aviso 'Instalar app'.
    El service worker (public/sw.js) no guarda datos de la API; ver el comentario de ese archivo. */
 import { useEffect, useState } from 'react';
+import { vigilarVersionVieja } from './cargaSegura';
 
 interface EventoInstalar extends Event {
   prompt(): Promise<void>;
@@ -18,6 +19,7 @@ const esIOS = () =>
 
 /** Se llama una vez al arrancar (main.tsx). Solo en producción: en desarrollo un service worker estorba. */
 export function iniciarPwa() {
+  vigilarVersionVieja();
   window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); pedido = e as EventoInstalar; avisar(); });
   window.addEventListener('appinstalled', () => { pedido = null; avisar(); });
   if (!import.meta.env.PROD || !('serviceWorker' in navigator)) return;

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { JSBOT_ABRIR } from "./evento";
+import { cargaSegura } from "../../lib/cargaSegura";
 
 export { JSBOT_ABRIR };
 
@@ -8,7 +9,7 @@ const FOTO = "/img/jsbot/jsbot_4.webp";
 // El panel (la conversación, sus íconos y la llamada a la API) se descarga solo cuando alguien va a usar JSBot:
 // la portada solo carga la burbuja.
 const cargarPanel = () => import("./JSBotPanel");
-const JSBotPanel = lazy(cargarPanel);
+const JSBotPanel = lazy(() => cargaSegura(cargarPanel));
 const precargar = () => { cargarPanel().catch(() => { /* se reintenta al abrirlo */ }); };
 
 /**
