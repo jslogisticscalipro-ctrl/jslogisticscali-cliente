@@ -442,3 +442,8 @@ Por petición explícita del dueño, `Home.tsx` sustituye la composición anteri
 - `src/lib/pwa.ts` registra el service worker (solo en producción) y da `useInstalarApp()`. La opción «Instalar app» está en el menú de la cuenta del portal (`components/InstalarApp.tsx`); en iPhone explica «Compartir → Agregar a pantalla de inicio».
 - Íconos en `public/pwa/` (logo sobre blanco; el «maskable» deja margen para recortes circulares). `public/img/favicon_io/site.webmanifest` es el heredado, está sin nombre y no se usa.
 - `vercel.json` sirve `sw.js` sin caché. Comprobado con Chromium: sin errores de instalabilidad y pantalla sin conexión al navegar sin red. No se probó la instalación real en un celular.
+
+## PWA: borde superior y pantallas tras un despliegue — 2026-11-17
+
+- `index.html` ahora lleva `viewport-fit=cover`; sin eso `env(safe-area-inset-*)` valía 0 en la app instalada y el header quedaba pegado al borde. La barra de la landing y el ingreso suman el margen superior.
+- `src/lib/cargaSegura.ts` reintenta una carga diferida y, si el archivo de la versión vieja ya no existe, recarga la app una vez por minuto. Todos los `lazy()` pasan por ahí; los nuevos también deben hacerlo.

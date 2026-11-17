@@ -24,6 +24,7 @@ import { InicioSkeleton } from './InicioSkeleton';
 import { CampanitaCliente } from './Notificaciones';
 import { clientToast } from '../../utils/clientToast';
 import OpcionInstalarApp from '../../components/InstalarApp';
+import { cargaSegura } from '../../lib/cargaSegura';
 
 // Cada pestaña y el detalle del pedido van en su propio archivo: se descargan solo al abrirlos.
 const cargar = {
@@ -31,10 +32,10 @@ const cargar = {
   pedidos: () => import('./Pedidos'),
   cuenta: () => import('./Cuenta'),
 };
-const Inicio = lazy(cargar.inicio);
-const Pedidos = lazy(cargar.pedidos);
-const Cuenta = lazy(cargar.cuenta);
-const VerPedido = lazy(() => import('./VerPedido'));
+const Inicio = lazy(() => cargaSegura(cargar.inicio));
+const Pedidos = lazy(() => cargaSegura(cargar.pedidos));
+const Cuenta = lazy(() => cargaSegura(cargar.cuenta));
+const VerPedido = lazy(() => cargaSegura(() => import('./VerPedido')));
 /** Al acercar el puntero o el foco a una pestaña del menú se adelanta su descarga. */
 const precargar = (k: string) => { cargar[k as PestanaCliente]?.().catch(() => { /* se reintenta al abrirla */ }); };
 

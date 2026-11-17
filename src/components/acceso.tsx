@@ -156,7 +156,7 @@ export function MarcoAcceso({
   sinEntrada?: boolean;
 }) {
   return (
-    <div ref={intro?.raiz} className="relative isolate flex min-h-screen items-center justify-center overflow-hidden bg-slate-50 dark:bg-[#060d18] transition-colors duration-300 px-5 pb-10 pt-24 sm:px-4 sm:pb-16 sm:pt-28">
+    <div ref={intro?.raiz} className="relative isolate flex min-h-screen items-center justify-center overflow-hidden bg-slate-50 dark:bg-[#060d18] transition-colors duration-300 px-5 pb-10 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-4 sm:pb-16 sm:pt-[calc(7rem+env(safe-area-inset-top))]">
       {/* Fondo: malla y luces ambientales (el mapa va en MapaSede, anclado a la columna) */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#fff_0%,_rgb(248_250_252_/_0.9)_60%,_rgb(241_245_249_/_0.8)_100%)] dark:hidden" />
