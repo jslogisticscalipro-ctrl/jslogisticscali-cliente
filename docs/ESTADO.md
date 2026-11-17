@@ -447,3 +447,7 @@ Por petición explícita del dueño, `Home.tsx` sustituye la composición anteri
 
 - `index.html` ahora lleva `viewport-fit=cover`; sin eso `env(safe-area-inset-*)` valía 0 en la app instalada y el header quedaba pegado al borde. La barra de la landing y el ingreso suman el margen superior.
 - `src/lib/cargaSegura.ts` reintenta una carga diferida y, si el archivo de la versión vieja ya no existe, recarga la app una vez por minuto. Todos los `lazy()` pasan por ahí; los nuevos también deben hacerlo.
+
+## App instalada: solo el portal — 2026-11-17
+
+- Un PWA instala el mismo sitio, así que la portada y el rastreo no se pueden dejar fuera del paquete; lo que sí se hace es no mostrarlos. `start_url` es `/cliente/` y, con la app instalada (`instalada()` de `lib/pwa.ts`), `/`, `/register`, `/solicitar-envio`, `/track`, `/rastrear` y `/tracking` redirigen a `/cliente/` (sin sesión, `RequireRole` manda al ingreso). Quedan igual `/login`, `/recuperar`, `/restablecer` y `/activar*`, porque salen de correos y del cierre de sesión. En el navegador normal nada cambia.
