@@ -12,7 +12,7 @@ let pedido: EventoInstalar | null = null;
 const oyentes = new Set<() => void>();
 const avisar = () => oyentes.forEach((f) => f());
 
-const instalada = () =>
+export const instalada = () =>
   window.matchMedia('(display-mode: standalone)').matches || (navigator as Navigator & { standalone?: boolean }).standalone === true;
 const esIOS = () =>
   /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);

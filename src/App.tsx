@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useLayoutEffect, useState } from 'react';
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './auth/AuthProvider';
 import RequireRole from './auth/RequireRole';
@@ -13,6 +13,7 @@ import FalloPantalla from './components/FalloPantalla';
 import { ApiError } from './api/http';
 import { FRESCO, EN_MEMORIA } from './utils/queryCache';
 import { cargaSegura } from './lib/cargaSegura';
+import { instalada } from './lib/pwa';
 
 // La portada va en el archivo principal porque es lo que más se abre. El resto de páginas se descarga solo cuando se visita:
 // quien entra a la portada no baja el portal, y quien entra al portal no baja el registro ni el rastreo (ni axios, que solo usan ellos).
@@ -72,6 +73,9 @@ function ScrollToHash() {
   return null;
 }
 
+// Rutas públicas que no se ofrecen dentro de la app instalada.
+const RUTAS_SOLO_NAVEGADOR = ['/', '/register', '/solicitar-envio', '/track', '/rastrear', '/tracking'];
+
 function Rutas() {
   const { pathname } = useLocation();
   // El portal del cliente trae su propia barra y menú (los de la app actual); el resto usa los de la landing.
@@ -85,6 +89,8 @@ function Rutas() {
   const esAcceso = ['/login', '/recuperar', '/restablecer', '/activar', '/activar-cuenta'].includes(pathname);
   // En el ingreso se va bajando el portal, para que al entrar no haya que esperarlo.
   useEffect(() => { if (pathname === '/login') import('./portal/PortalCliente').catch(() => { /* se reintenta al abrirlo */ }); }, [pathname]);
+  // La app instalada es solo el portal de clientes: la portada y el rastreo público quedan para el navegador.
+  if (instalada() && RUTAS_SOLO_NAVEGADOR.includes(pathname)) return <Navigate to="/cliente/" replace />;
   return (
     <div className="flex flex-col min-h-screen">
       {!sinMarco && !esPortada && !esRastreo && !esSolicitud && <Navbar hero={esAcceso} />}
