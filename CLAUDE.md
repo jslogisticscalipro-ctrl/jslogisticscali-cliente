@@ -6,6 +6,10 @@ Guía para Claude en `jslogistics-cliente-frontend`: la **landing pública y el 
 
 Antes de cambiar algo lee también [docs/ESTADO.md](docs/ESTADO.md) (decisiones, trampas y últimos cambios) y [ARCHITECTURE.md](ARCHITECTURE.md) (el porqué). El contrato de la API está en `js-logistics/backend/README.md` (repo hermano `js-logistics`, que tiene el backend y la app de oficina y mensajeros). Si algo de esta guía choca con lo que pide la persona, pregúntale antes de seguir.
 
+## Modelo de IA
+
+**Trabaja siempre con Claude Sonnet 5.5** (`claude-sonnet-5-5`) en este repositorio. Si la sesión está con otro modelo, cámbialo con `/model claude-sonnet-5-5` antes de empezar.
+
 ## Stack y comandos
 
 React 18 · TypeScript estricto · Vite 6 · Tailwind 3 · React Router 6 · TanStack Query 5 · lucide-react · react-toastify. Sin pruebas automáticas todavía.
