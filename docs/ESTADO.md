@@ -451,3 +451,8 @@ Por petición explícita del dueño, `Home.tsx` sustituye la composición anteri
 ## App instalada: solo el portal — 2026-11-17
 
 - Un PWA instala el mismo sitio, así que la portada y el rastreo no se pueden dejar fuera del paquete; lo que sí se hace es no mostrarlos. `start_url` es `/cliente/` y, con la app instalada (`instalada()` de `lib/pwa.ts`), `/`, `/register`, `/solicitar-envio`, `/track`, `/rastrear` y `/tracking` redirigen a `/cliente/` (sin sesión, `RequireRole` manda al ingreso). Quedan igual `/login`, `/recuperar`, `/restablecer` y `/activar*`, porque salen de correos y del cierre de sesión. En el navegador normal nada cambia.
+
+## Hero tapado por el header en el celular — 2026-11-22
+
+- El header fijo suma `env(safe-area-inset-top)` a su altura (notch, isla dinámica, PWA instalada), pero el Hero solo reservaba `pt-16`/`pt-20`, así que la parte de arriba (insignia y título) quedaba debajo del header y no se podía ver ni volviendo al inicio.
+- Ahora `:root` define `--safe-top` (`index.css`) y lo usan el header, el `padding-top` del Hero y el `scroll-margin-top` de las secciones. Si agregas otra pantalla con el `Navbar` fijo, suma `var(--safe-top)` a su espacio superior.

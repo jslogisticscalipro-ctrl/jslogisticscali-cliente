@@ -161,7 +161,7 @@ const Navbar: React.FC<{ hero?: boolean }> = ({ hero = false }) => {
   );
 
   return (
-    <header style={{ paddingTop: 'env(safe-area-inset-top)' }} className={hero
+    <header style={{ paddingTop: 'var(--safe-top)' }} className={hero
       ? `fixed top-0 inset-x-0 z-50 w-full border-b bg-slate-950/80 dark:bg-slate-950/85 backdrop-blur-md transition-all duration-300 ${scrolled ? 'border-slate-700/80 shadow-xl shadow-slate-950/30' : 'border-slate-800/60'}`
       : `fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
           scrolled

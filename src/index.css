@@ -5,6 +5,9 @@
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
 
+  /* Borde superior seguro (notch / isla / PWA instalada): el header fijo lo suma a su altura, el contenido que queda debajo también. */
+  :root { --safe-top: env(safe-area-inset-top, 0px); }
+
   html { 
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;

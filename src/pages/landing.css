@@ -28,7 +28,7 @@
 }
 .landing-section {
   padding-block: 72px;
-  scroll-margin-top: 96px;
+  scroll-margin-top: calc(96px + var(--safe-top));
 }
 .landing-section-alt {
   background: var(--lp-alt);
@@ -329,7 +329,7 @@ button.boton-menu:focus-visible {
   background-image: radial-gradient(#1e293b 1px, transparent 1px);
 }
 
-@media (min-width: 1024px) { .landing .landing-section { scroll-margin-top: 112px; } }
+@media (min-width: 1024px) { .landing .landing-section { scroll-margin-top: calc(112px + var(--safe-top)); } }
 /* "Nosotros" antes de lg: la tarjeta blanca va dentro de la foto, con vidrio para no tapar del todo la van. */
 @media (max-width: 1023.98px) {
   .landing-about-badge {
