@@ -131,7 +131,7 @@ export default function Home() {
   return (
     <div className="landing">
       <Navbar hero />
-      <section className="landing-hero relative isolate flex min-h-dvh w-full flex-col overflow-hidden bg-slate-950 pt-16 lg:pt-20">
+      <section className="landing-hero relative isolate flex min-h-dvh w-full flex-col overflow-hidden bg-slate-950 pt-[calc(4rem+var(--safe-top))] lg:pt-[calc(5rem+var(--safe-top))]">
         <HeroCarrusel />
         <div
           aria-hidden="true"
